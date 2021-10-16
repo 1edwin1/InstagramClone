@@ -24,7 +24,7 @@ The following **additional** features are implemented:
 - [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough
-Does not let me submit gif. I"ll update this on 10/17/2021
+<img src='https://github.com/1edwin1/InstagramClone' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 Here's a walkthrough of implemented user stories:
 
