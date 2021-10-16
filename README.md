@@ -24,7 +24,7 @@ The following **additional** features are implemented:
 - [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough
-<img src='https://github.com/1edwin1/InstagramClone' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/1edwin1/InstagramClone/blob/master/Instagram.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 Here's a walkthrough of implemented user stories:
 
