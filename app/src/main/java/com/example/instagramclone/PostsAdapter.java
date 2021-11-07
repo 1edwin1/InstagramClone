@@ -18,7 +18,18 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter <PostsAdapter.ViewHolder>{
 
     private Context context;
-    private List<Post> posts;
+    private List<Post> posts; //private to protected?
+
+    //added clear and addAll
+    public void clear(){
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Post> postList){
+        posts.addAll(postList);
+        notifyDataSetChanged();
+    }
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ public class PostsFragment extends Fragment {
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
+    //Added!
+    SwipeRefreshLayout swipeContainer;
 
     public PostsFragment() {
         // Required empty public constructor
@@ -47,9 +50,13 @@ public class PostsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
-
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(),allPosts);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         //Steps to use the recycler view;
         // 0. create layout for one row in the list
         // 1. create the adapter
@@ -59,6 +66,17 @@ public class PostsFragment extends Fragment {
         // 4. set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
+
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh(){
+                Log.i(TAG, "fetching new data!");
+                adapter.clear();
+                queryPosts(); //is it this like populateHomeTimeLine()?
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 
     protected void queryPosts() {
@@ -77,6 +95,7 @@ public class PostsFragment extends Fragment {
                     Log.i(TAG, "Post: "+post.getDescription()+ ", username: "+post.getUser().getUsername());
                 }
                 allPosts.addAll(posts);
+                swipeContainer.setRefreshing(false); //added!
                 adapter.notifyDataSetChanged();
             }
         });
